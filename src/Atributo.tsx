@@ -2,10 +2,11 @@
 import { useState } from "react";
 import "./Atributo.css";
 
+type AtributosProps = {
+    icone: String;
+};
 
-
-
-export default function Atributo(){
+export default function Atributo({icone} : AtributosProps){
     const[valor, setValor] = useState<number>(0);
 
     function valores(){
@@ -18,8 +19,8 @@ export default function Atributo(){
     }
     return(
         <div className="atributo">
-            {valor}{"❤️".repeat(valor)}
-            <span className="inativo">{"❤️".repeat(5-valor)}</span>
+            {valor}{icone.repeat(valor)}
+            <span className="inativo">{icone.repeat(5-valor)}</span>
             <button onClick={valores}>+</button>
         </div>
     )
