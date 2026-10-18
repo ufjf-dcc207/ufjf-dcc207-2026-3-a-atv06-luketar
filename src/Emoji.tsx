@@ -38,23 +38,26 @@ export default function Emoji(){
     function cicloClick(){ 
         if (emoji.vida === 0) return;
 
-        setEmoji({ ...emoji, comida: Math.max(0, emoji.comida - 1) as AtributoType });
-        if (emoji.comida === 0) {
-            setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+       const newEmoji = structuredClone(emoji);
+        if (newEmoji.comida === 0) {
+            newEmoji.vida = Math.max(0, newEmoji.vida - 1) as AtributoType;
         }
+        newEmoji.comida = Math.max(0, emoji.comida - 1) as AtributoType;
 
-        setEmoji((prevEmoji) => ({ ...prevEmoji, agua: Math.max(0, prevEmoji.agua - 1) as AtributoType }));
-        if (emoji.agua === 0) {
-            setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+        if (newEmoji.agua === 0) {
+            newEmoji.vida = Math.max(0, newEmoji.vida - 1) as AtributoType;
         }
-        if (emoji.luz) {
-            setEmoji((prevEmoji) => ({ ...prevEmoji, energia: Math.max(0, prevEmoji.energia - 1) as AtributoType }));
-            if (emoji.energia === 0) {
-                setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+        newEmoji.agua = Math.max(0, newEmoji.agua - 1) as AtributoType;
+
+        if (newEmoji.luz) {
+            if (newEmoji.energia === 0) {
+                newEmoji.vida = Math.max(0, newEmoji.vida - 1) as AtributoType;
             }
+            newEmoji.energia = Math.max(0, newEmoji.energia - 1) as AtributoType;
         } else {
-            setEmoji((prevEmoji) => ({ ...prevEmoji, energia: Math.min(5, prevEmoji.energia + 1) as AtributoType }));
+            newEmoji.energia = Math.min(5, newEmoji.energia + 1) as AtributoType;
         }
+        setEmoji(newEmoji);
 
         
     }
