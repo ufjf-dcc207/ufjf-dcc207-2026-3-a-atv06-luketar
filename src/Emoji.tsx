@@ -30,31 +30,31 @@ export default function Emoji(){
 
     function hidratarClick() {
         if (emoji.vida === 0) return;
-        setEmoji({...emoji, agua: Math.min(5, emoji.agua + 1) as AtributoType});
-    }
+        setEmoji({ ...emoji, agua: Math.min(5, emoji.agua + 1) as AtributoType });    }
 
     function altenarLuzClick(){
-        setEmoji({...emoji, luz: !emoji.luz});
-
+        setEmoji({ ...emoji, luz: !emoji.luz });
     }
     function cicloClick(){ 
-        //if(vida === 0) return;   
-        //setComida(Math.max(0, comida - 1));
-        //if (comida === 0) {
-        //    setVida(Math.max(0, vida - 1));
-        //}
-        //setAgua(Math.max(0, agua - 1));
-        //if (agua === 0) {
-        //    setVida((prevVida) => Math.max(0, prevVida - 1));
-        //}
-        //if (luz) {
-        //    setEnergia(Math.max(0, energia - 1));
-        //    if (energia === 0) {
-        //        setVida((prevVida) => Math.max(0, prevVida - 1));
-        //    }
-        //} else {
-        //    setEnergia(Math.min(5, energia + 1));
-        //}
+        if (emoji.vida === 0) return;
+
+        setEmoji({ ...emoji, comida: Math.max(0, emoji.comida - 1) as AtributoType });
+        if (emoji.comida === 0) {
+            setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+        }
+
+        setEmoji((prevEmoji) => ({ ...prevEmoji, agua: Math.max(0, prevEmoji.agua - 1) as AtributoType }));
+        if (emoji.agua === 0) {
+            setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+        }
+        if (emoji.luz) {
+            setEmoji((prevEmoji) => ({ ...prevEmoji, energia: Math.max(0, prevEmoji.energia - 1) as AtributoType }));
+            if (emoji.energia === 0) {
+                setEmoji((prevEmoji) => ({ ...prevEmoji, vida: Math.max(0, prevEmoji.vida - 1) as AtributoType }));
+            }
+        } else {
+            setEmoji((prevEmoji) => ({ ...prevEmoji, energia: Math.min(5, prevEmoji.energia + 1) as AtributoType }));
+        }
 
         
     }
